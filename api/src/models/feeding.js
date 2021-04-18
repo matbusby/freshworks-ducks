@@ -1,14 +1,12 @@
 import mongoose from 'mongoose';
-
+import { pointSchema } from './common/point.js';
 const { Schema } = mongoose;
 
 const feedingSchema = new Schema({
-
-    _id: String,
     time: Date,
-    location: String,
+    location: pointSchema,
     food: String,
-    quantity: String,
+    quantity: Number,
 }
 )
 
