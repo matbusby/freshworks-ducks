@@ -29,8 +29,7 @@ import {
   AccountBox as AccountBoxIcon,
   Info as InfoIcon,
 } from "@material-ui/icons";
-import { context } from '../context';
-
+import { context } from "../context";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -46,18 +45,19 @@ const MenuComponent = () => {
 
   const [navigationList, setNavigationList] = useState([
     { icon: HomeIcon, text: "Home", link: "/" },
-    { icon: InfoIcon, text: "About", link: "/about" },
+    { icon: InfoIcon, text: "New Feeding", link: "/feeding" },
+    { icon: InfoIcon, text: "Review Feedings", link: "/review" },
   ]);
 
   const handleMenuToggle = () => {
-    dispatch({ type: 'Toggle Menu' });
+    dispatch({ type: "Toggle Menu" });
   };
 
   return (
     <div className={classes.root}>
       <SwipeableDrawer
         anchor="left"
-        open={state['menu']}
+        open={state["menu"]}
         onOpen={handleMenuToggle}
         onClose={handleMenuToggle}
       >

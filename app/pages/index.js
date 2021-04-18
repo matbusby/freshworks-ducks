@@ -1,7 +1,4 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-
-import HomePageView from '../views/HomePageView.jsx';
+import HomePageView from '../views/HomePageView';
 import LayoutComponent from '../components/layout';
 
 const HomePage = () => {
