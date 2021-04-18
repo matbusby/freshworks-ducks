@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import app from './rest';
+import routes from './rest/index.js';
 
 mongoose.connect(
     'mongodb://localhost:27017/ducks' || '',
@@ -17,7 +17,7 @@ mongoose.connect(
     },
 );
 
-app.listen(2000, () => {
+routes.listen(2000, () => {
     console.log(
         `Successfully booted server. Listening on port: 2000`,
     );

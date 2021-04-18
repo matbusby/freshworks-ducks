@@ -1,5 +1,5 @@
 import express from 'express';
-import { Feeding } from '../../models/feeding';
+import { Feeding } from '../../models/feeding.js';
 
 const feedingRoute = express.Router();
 
@@ -24,3 +24,5 @@ feedingRoute.get('/feedings/', async (request, response) => {
         response.status(400).send(`Error: failed to fetch feedings - ${error}`);
     }
 })
+
+export { feedingRoute };
