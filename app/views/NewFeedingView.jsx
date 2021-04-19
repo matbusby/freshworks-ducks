@@ -21,7 +21,7 @@ import {
 } from "@material-ui/core";
 import Feeding from "../pages/api/feeding";
 
-Geocode.setApiKey("AIzaSyD4Rah2Ughn-m3FYwwAJeEQAMOAvVB1MsI");
+Geocode.setApiKey(process.env.NEXT_PUBLIC_MAPS_API);
 Geocode.setLanguage("en");
 Geocode.setRegion("ca");
 Geocode.setLocationType("ROOFTOP");
@@ -43,7 +43,7 @@ const NewFeedingView = () => {
 
   const LocationParser = () => {
     const address = `${street} ${city} ${province} ${country}`;
-    return Geocode.fromAddress(address, process.env.MAPS_API).then(
+    return Geocode.fromAddress(address, process.env.NEXT_PUBLIC_MAPS_API).then(
       (response) => {
         const { lat, lng } = response.results[0].geometry.location;
         console.log(lat, lng);
@@ -62,7 +62,6 @@ const NewFeedingView = () => {
   const submitFeeding = async (event) => {
     event.preventDefault();
     LocationParser().then((point) => {
-
       const newDate = formatISO(date, { representation: "date" });
       const newTime = formatISO(time, { representation: "time" });
       const combinedDateTime = `${newDate}T${newTime}`;
