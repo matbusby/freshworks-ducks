@@ -92,14 +92,17 @@ const NewFeedingView = () => {
                   <DatePicker
                     label="Set Feeding Date"
                     value={date}
-                    onChange={(event) => setDate(event.target.value)}
+                    onChange={(event) => setDate(event)}
                   />
                   <TimePicker
                     required
                     label="Set Feeding Time"
                     value={time}
                     size="medium"
-                    onChange={(event) => setTime(event.target.value)}
+                    onChange={(event) => {
+                      console.log(`Time: ${JSON.stringify(event)}`);
+                      setTime(event);
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
