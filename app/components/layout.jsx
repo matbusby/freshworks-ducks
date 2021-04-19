@@ -22,10 +22,10 @@ const LayoutComponent = (props) => {
   return (
     <div className={classes.root}>
       <Helmet>
-        <title>Chrysalis Network</title>
+        <title>Feedin' the Ducks</title>
         <meta
           name="description"
-          content="A national toll-free counselling service available to all demographics who have been trafficked."
+          content="An utility to track the feeding of ducks"
         />
         <link rel="icon" href="/icons/favicon.ico" />
       </Helmet>
