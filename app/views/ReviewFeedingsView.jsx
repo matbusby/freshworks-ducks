@@ -67,6 +67,7 @@ const ReviewFeedingsView = () => {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
+              <StyledTableCell>Number of Ducks</StyledTableCell>
               <StyledTableCell>Type of Food</StyledTableCell>
               <StyledTableCell align="right">
                 Amount of food in grams
@@ -83,17 +84,26 @@ const ReviewFeedingsView = () => {
                   return (
                     <StyledTableRow key={feeding._id}>
                       <StyledTableCell component="th" scope="row">
-                        {feeding.food}
+                        <Typography variant="h5" align="center">{feeding.numberOfDucks}</Typography>
+                      </StyledTableCell>
+                      <StyledTableCell component="th" scope="row">
+                        <Typography>{feeding.food}</Typography>
+                      </StyledTableCell>
+                      <StyledTableCell align="right" align="center">
+                        <Typography>{feeding.quantity}</Typography>
                       </StyledTableCell>
                       <StyledTableCell align="right">
-                        {feeding.quantity}
-                      </StyledTableCell>
-                      <StyledTableCell align="right">
-                        {format(new Date(feeding.time), "MM/dd/yyyy @ h:mm")}
+                        <Typography>
+                          {format(new Date(feeding.time), "MM/dd/yyyy @ h:mm")}
+                        </Typography>
                       </StyledTableCell>
                       <StyledTableCell align="right">
                         <Grid container direction="column" alignItems="center">
-                          {`${feeding.location.street} ${feeding.location.city} ${feeding.location.province} ${feeding.location.country}`}
+                          <Typography align="center">
+                            {`${feeding.location.street}`}
+                            <br />
+                            {`${feeding.location.city} ${feeding.location.province} ${feeding.location.country}`}
+                          </Typography>
                           {feeding.location.coords ? (
                             <a
                               target="_blank"

@@ -11,6 +11,7 @@ const feedingSchema = new Schema({
         province: String,
         country: String,
     },
+    numberOfDucks: Number,
     food: String,
     quantity: Number,
 }

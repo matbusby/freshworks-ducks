@@ -49,6 +49,7 @@ const NewFeedingView = () => {
   const [province, setProvince] = useState("");
   const [country, setCountry] = useState("");
   const [food, setFood] = useState("");
+  const [numberOfDucks, setNumberOfDucks] = useState("");
   const [quantity, setQuantity] = useState(0);
 
   const LocationParser = () => {
@@ -85,6 +86,7 @@ const NewFeedingView = () => {
           country: country,
         },
         food: food,
+        numberOfDucks: numberOfDucks,
         quantity: quantity,
       };
       const response = Feeding.postNewFeeding(feedingObject);
@@ -103,14 +105,10 @@ const NewFeedingView = () => {
             }}
           >
             <Grid container direction="column" spacing={2}>
-              <Grid
-                container
-                direction="row"
-                spacing={2}
-                justify="space-evenly"
-              >
+              <Grid container direction="row" spacing={2} justify="center">
                 <Grid item xs={5}>
                   <DatePicker
+                    style={{ width: "100%" }}
                     InputProps={{ disableUnderline: true }}
                     label="Set Feeding Date"
                     value={date}
@@ -120,6 +118,7 @@ const NewFeedingView = () => {
                 <Grid item xs={5}>
                   <TimePicker
                     InputProps={{ disableUnderline: true }}
+                    style={{ width: "100%" }}
                     required
                     label="Set Feeding Time"
                     value={time}
@@ -131,7 +130,7 @@ const NewFeedingView = () => {
                   />
                 </Grid>
               </Grid>
-              <Grid container justify="space-between">
+              <Grid container justify="center" spacing={2}>
                 <Grid item xs={12} md={6}>
                   <TextField
                     label="Street"
@@ -169,8 +168,8 @@ const NewFeedingView = () => {
                   />
                 </Grid>
               </Grid>
-              <Grid container justify="space-between">
-                <Grid item xs={12} md={5}>
+              <Grid container justify="center">
+                <Grid item xs={12} md={3}>
                   <TextField
                     value={food}
                     onChange={(event) => setFood(event.target.value)}
@@ -179,7 +178,16 @@ const NewFeedingView = () => {
                     InputLabelProps={{ shrink: true }}
                   />
                 </Grid>
-                <Grid item xs={12} md={5}>
+                <Grid item xs={12} md={3}>
+                  <TextField
+                    value={numberOfDucks}
+                    onChange={(event) => setNumberOfDucks(event.target.value)}
+                    label="Number of Ducks"
+                    fullWidth
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={3}>
                   <TextField
                     value={quantity}
                     type="number"

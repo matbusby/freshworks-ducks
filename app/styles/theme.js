@@ -47,7 +47,7 @@ theme.overrides = {
   },
   MuiIconButton: {
     colorPrimary: {
-      color: theme.palette.primary.light,
+      color: theme.palette.secondary.main,
       borderRadius: '80px', //Circle icon
       '&:hover': {
         backgroundColor: theme.palette.primary.main,
