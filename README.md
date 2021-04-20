@@ -1,18 +1,18 @@
 # freshworks-ducks
 
-This application can be run either locally or via docker.
+This application can be run either via docker or locally.
 
 ## NPM install
 
 In a terminal, navigate to the api directory off of the main directory
 
-Enter: npm install
+Enter: **npm install**
 
 This will install all needed node-modules to run application's backend
 
 Navigate the the app directory off of the main directory
 
-Enter: npm install
+Enter: **npm install**
 
 This will install all needed node-modules to run the application's frontend
 
@@ -26,11 +26,11 @@ Copy this file to the base of the app directory (./app/.env)
 
 In a terminal, navigate to the base directory of the application
 
-Enter: docker-compose build
+Enter: **docker-compose build**
 
 This will build all necessary components for the application.  The first time you run this it may take some time to complete.
 
-Once docker-compose build has completed: Enter: docker-compose up
+Once docker-compose build has completed: **Enter: docker-compose up**
 
 This will load the application into your local docker desktop
 
@@ -45,18 +45,18 @@ Docker seems to need one specific connection string to work, while running local
 
 To run locally, navigate to ./api/src/app.js
 
-Edit the const "DB_CONNECTION" to be: 'mongodb://localhost:27017/ducks'
+Edit the const "DB_CONNECTION" to be: 'mongodb://**localhost**:27017/ducks'
 
 ### In order to run locally you will need to install MongoDB on your system
 #### A community download of MongoDB is available [here](https://www.mongodb.com/try/download/community)
 
 In a terminal navigate to the api directory off of the main directory.
 
-Enter: npm run start
+Enter: **npm run start**
 
 Open a second terminal and navigate to the app directory off of the main directory
 
-Enter: npm run build
+Enter: **npm run build**
 
 Once that has completed, enter: npm run start
 
