@@ -27,7 +27,17 @@ Geocode.setRegion("ca");
 Geocode.setLocationType("ROOFTOP");
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    paddingTop: "50px",
+  },
+  card: {
+    maxWidth: "800px",
+    margin: "0 auto",
+  },
+  button: {
+    backgroundColor: theme.palette.secondary.main,
+    color: "#ffffff",
+  },
 }));
 
 const NewFeedingView = () => {
@@ -61,7 +71,7 @@ const NewFeedingView = () => {
 
   const submitFeeding = async (event) => {
     event.preventDefault();
-    LocationParser().then((point) => {
+    const feedingSubmitResponse = LocationParser().then((point) => {
       const newDate = formatISO(date, { representation: "date" });
       const newTime = formatISO(time, { representation: "time" });
       const combinedDateTime = `${newDate}T${newTime}`;
@@ -72,29 +82,38 @@ const NewFeedingView = () => {
         quantity: quantity,
       };
       const response = Feeding.postNewFeeding(feedingObject);
-      console.log(response);
       return response;
     });
+    console.log(feedingSubmitResponse);
   };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <div className={classes.root}>
-        <form
-          onSubmit={(event) => {
-            submitFeeding(event);
-          }}
-        >
-          <Grid container direction="column" spacing={2}>
-            <Grid item>
-              <Grid container direction="row" spacing={2}>
-                <Grid item>
+        <Card elevation={10} className={classes.card}>
+          <form
+            onSubmit={(event) => {
+              submitFeeding(event);
+            }}
+          >
+            <Grid container direction="column" spacing={2}>
+              <Grid
+                container
+                direction="row"
+                spacing={2}
+                justify="space-evenly"
+              >
+                <Grid item xs={5}>
                   <DatePicker
+                    InputProps={{ disableUnderline: true }}
                     label="Set Feeding Date"
                     value={date}
                     onChange={(event) => setDate(event)}
                   />
+                </Grid>
+                <Grid item xs={5}>
                   <TimePicker
+                    InputProps={{ disableUnderline: true }}
                     required
                     label="Set Feeding Time"
                     value={time}
@@ -105,70 +124,74 @@ const NewFeedingView = () => {
                     }}
                   />
                 </Grid>
+              </Grid>
+              <Grid container justify="space-between">
                 <Grid item xs={12} md={6}>
-                  <Grid item>
-                    <TextField
-                      label="Street"
-                      fullWidth
-                      value={street}
-                      size="medium"
-                      onChange={(event) => setStreet(event.target.value)}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <TextField
-                      label="City"
-                      fullWidth
-                      value={city}
-                      size="medium"
-                      onChange={(event) => setCity(event.target.value)}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <TextField
-                      label="Province/State"
-                      fullWidth
-                      value={province}
-                      size="medium"
-                      onChange={(event) => setProvince(event.target.value)}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <TextField
-                      label="Country"
-                      fullWidth
-                      value={country}
-                      size="medium"
-                      onChange={(event) => setCountry(event.target.value)}
-                    />
-                  </Grid>
+                  <TextField
+                    label="Street"
+                    fullWidth
+                    value={street}
+                    size="medium"
+                    onChange={(event) => setStreet(event.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <TextField
+                    label="City"
+                    fullWidth
+                    value={city}
+                    size="medium"
+                    onChange={(event) => setCity(event.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <TextField
+                    label="Province/State"
+                    fullWidth
+                    value={province}
+                    size="medium"
+                    onChange={(event) => setProvince(event.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <TextField
+                    label="Country"
+                    fullWidth
+                    value={country}
+                    size="medium"
+                    onChange={(event) => setCountry(event.target.value)}
+                  />
                 </Grid>
               </Grid>
+              <Grid container justify="space-between">
+                <Grid item xs={12} md={5}>
+                  <TextField
+                    value={food}
+                    onChange={(event) => setFood(event.target.value)}
+                    label="Type of Food"
+                    fullWidth
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={5}>
+                  <TextField
+                    value={quantity}
+                    type="number"
+                    onChange={(event) => setQuantity(event.target.value)}
+                    label="Amount of Food in grams"
+                    fullWidth
+                    InputLabelProps={{ shrink: true }}
+                  />
+                </Grid>
+              </Grid>
+              <Grid item xs={12} justify="space-around">
+                <Button type="submit" className={classes.button}>
+                  Submit Feeding
+                </Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <TextField
-                value={food}
-                onChange={(event) => setFood(event.target.value)}
-                label="Type of Food"
-                fullWidth
-                InputLabelProps={{ shrink: true }}
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                value={quantity}
-                type="number"
-                onChange={(event) => setQuantity(event.target.value)}
-                label="Amount of Food in grams"
-                fullWidth
-                InputLabelProps={{ shrink: true }}
-              />
-            </Grid>
-            <Grid item>
-              <Button type="submit">Submit Feeding</Button>
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        </Card>
       </div>
     </MuiPickersUtilsProvider>
   );

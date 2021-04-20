@@ -15,10 +15,6 @@ const LayoutComponent = (props) => {
   const [menuToggle, setMenuToggle] = useState(false);
   const { title, children } = props;
 
-  useEffect(() => {
-    console.log(`Menu toggle in layout - ${menuToggle}`);
-  }, [menuToggle]);
-
   return (
     <div className={classes.root}>
       <Helmet>

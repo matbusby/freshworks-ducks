@@ -7,9 +7,13 @@ import {
   TableRow,
   Typography,
   withStyles,
+  Link,
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import Feeding from "../pages/api/feeding";
+import RoomIcon from "@material-ui/icons/Room";
+import IconButton from "@material-ui/core/IconButton";
+import format from "date-fns/format";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -27,7 +31,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-    '&:nth-of-type(odd)': {
+    "&:nth-of-type(odd)": {
       backgroundColor: theme.palette.action.hover,
     },
   },
@@ -72,10 +76,17 @@ const ReviewFeedingsView = () => {
                       {feeding.quantity}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      {feeding.time}
+                      {format(new Date(feeding.time), "MM/dd/yyyy @ h:mm")}
                     </StyledTableCell>
                     <StyledTableCell align="right">
-                      hello
+                      <a
+                        target="_blank"
+                        href={`https://www.google.com/maps/search/?api=1&query=${feeding.location.coordinates[0]},${feeding.location.coordinates[1]}`}
+                      >
+                        <IconButton>
+                          <RoomIcon fontSize="large" color="#3FA8B7" />
+                        </IconButton>
+                      </a>
                     </StyledTableCell>
                   </StyledTableRow>
                 );
