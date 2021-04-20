@@ -1,6 +1,7 @@
 import { makeStyles, Typography } from "@material-ui/core";
 import React from "react";
 import { useState, useCallback } from "react";
+import { useToasts } from "react-toast-notifications";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import {
   DatePicker,
@@ -8,7 +9,7 @@ import {
   MuiPickersUtilsProvider,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { formatISO } from "date-fns";
+import { formatISO, isPast } from "date-fns";
 import Geocode from "react-geocode";
 
 import {
@@ -28,7 +29,13 @@ Geocode.setLocationType("ROOFTOP");
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    paddingTop: "50px",
+    padding: "50px 15px 50px 15px",
+    backgroundImage: "url(" + "/assets/images/wetland-bg.svg" + ")",
+    backgroundPosition: "bottom",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100vw auto",
+    backgroundAttachment: "fixed",
+    bottom: "0",
   },
   card: {
     maxWidth: "800px",
@@ -42,6 +49,8 @@ const useStyles = makeStyles((theme) => ({
 
 const NewFeedingView = () => {
   const classes = useStyles();
+  const { addToast } = useToasts();
+
   const [time, setTime] = useState(new Date());
   const [date, setDate] = useState(new Date());
   const [street, setStreet] = useState("");
@@ -72,27 +81,62 @@ const NewFeedingView = () => {
 
   const submitFeeding = async (event) => {
     event.preventDefault();
-    const feedingSubmitResponse = LocationParser().then((point) => {
-      const newDate = formatISO(date, { representation: "date" });
-      const newTime = formatISO(time, { representation: "time" });
-      const combinedDateTime = `${newDate}T${newTime}`;
-      const feedingObject = {
-        time: combinedDateTime,
-        location: {
-          coords: point,
-          street: street,
-          city: city,
-          province: province,
-          country: country,
-        },
-        food: food,
-        numberOfDucks: numberOfDucks,
-        quantity: quantity,
-      };
-      const response = Feeding.postNewFeeding(feedingObject);
-      return response;
-    });
-    console.log(feedingSubmitResponse);
+
+    const newDate = formatISO(date, { representation: "date" });
+    const newTime = formatISO(time, { representation: "time" });
+    const combinedDateTime = `${newDate}T${newTime}`;
+
+    if (isPast(new Date(combinedDateTime))) {
+      LocationParser()
+        .then((point) => {
+          const feedingObject = {
+            time: combinedDateTime,
+            location: {
+              coords: point,
+              street: street,
+              city: city,
+              province: province,
+              country: country,
+            },
+            food: food,
+            numberOfDucks: numberOfDucks,
+            quantity: quantity,
+          };
+          Feeding.postNewFeeding(feedingObject)
+            .then((response) => {
+              console.log(`ID of new feeding - ${response._id}`);
+              addToast("Successfully registered new feeding", {
+                appearance: "success",
+              });
+              setTime(new Date());
+              setDate(new Date());
+              setStreet("");
+              setCity("");
+              setProvince("");
+              setCountry("");
+              setFood("");
+              setNumberOfDucks("");
+              setQuantity("");
+              return response;
+            })
+            .catch((error) => {
+              addToast(`Error registering new feeding ${error}`, {
+                appearance: "error",
+              });
+              return error;
+            });
+        })
+        .catch((error) => {
+          return error;
+        });
+    } else {
+      addToast(
+        `Please only enter feedings that have already occured.  Feeding times cannot be set in the future`,
+        {
+          appearance: "error",
+        }
+      );
+    }
   };
 
   return (
@@ -181,6 +225,7 @@ const NewFeedingView = () => {
                 <Grid item xs={12} md={3}>
                   <TextField
                     value={numberOfDucks}
+                    type="number"
                     onChange={(event) => setNumberOfDucks(event.target.value)}
                     label="Number of Ducks"
                     fullWidth

@@ -28,13 +28,13 @@ const AppBarComponent = ({ title }) => {
           <IconButton
             edge="start"
             className={classes.menuButton}
-            color="inherit"
+            color="secondary"
             aria-label="menu"
             onClick={handleMenuToggle}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h5">{title}</Typography>
+          <Typography variant="h5" color="textSecondary">{title}</Typography>
         </Toolbar>
       </AppBar>
     </div>

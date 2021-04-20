@@ -9,6 +9,7 @@ const Feeding = {
         }).then((response) => {
             return response.json()
         }).then((data) => {
+            console.log(``)
             return data;
         }).catch((error) => {
             console.log(`Error posting new feeding - ${error}`)
@@ -25,7 +26,7 @@ const Feeding = {
         }).then((data) => {
             return data;
         }).catch((error) => {
-            console.log(`Error posting new feeding - ${error}`)
+            console.log(`Error getting feedings - ${error}`)
             return error;
         })
     }

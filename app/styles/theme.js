@@ -11,16 +11,24 @@ const theme = createMuiTheme({
       light: '#E5E5E5', //Light Gray
     },
     text: {
-      primary: '#4A4A4A', //Dark Gray
+      primary: '#1f1f1f', //Dark Gray
       secondary: '#FFFFFF', //White
     },
   },
   typography: {
     allVariants: {
-      fontFamily: "'Quattrocento Sans', 'sans-serif'",
+      // fontFamily: "'Quattrocento Sans', 'sans-serif'",
     },
-    h1: {
-      fontWeight: 700,
+    h3: {
+      fontWeight: '700',
+      margin: '30px 0'
+    },
+    h6: {
+      fontWeight: '600',
+    },
+    body2: {
+      marginTop: '20px',
+      fontWeight: '500',
     },
   },
 });
@@ -33,7 +41,7 @@ theme.props = {
   },
 };
 
-theme.overrides = {
+theme.overrides = {  
   MuiButton: {
     root: {
       textTransform: 'capitalize',
@@ -92,17 +100,6 @@ theme.overrides = {
       marginBottom: '5px',
     },
   },
-  MuiAppBar: {
-    root: {
-      backgroundColor: theme.palette.primary.main,
-    }
-
-  },
-  MuiFormHelperText: {
-    root: {
-      color: theme.palette.text.primary,
-    }
-  }
 };
 
 export default theme;

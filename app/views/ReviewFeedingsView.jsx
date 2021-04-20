@@ -19,11 +19,17 @@ import format from "date-fns/format";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    backgroundImage: "url(" + "/assets/images/wetland-bg.svg" + ")",
+    backgroundPosition: "bottom",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "100vw auto",
+    backgroundAttachment: "fixed",
+    bottom: "0",
+    paddingTop: "40px",
   },
   box: {
     maxWidth: "800px",
-    margin: "40px auto",
+    margin: "0 auto",
     borderRadius: "0px",
     padding: "0px",
   },
@@ -31,8 +37,10 @@ const useStyles = makeStyles((theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.common.black,
+    textAlign: 'center',
+    fontSize: 16,
   },
   body: {
     fontSize: 14,
@@ -63,6 +71,7 @@ const ReviewFeedingsView = () => {
 
   return (
     <div className={classes.root}>
+
       <Card elevation={10} className={classes.box}>
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
@@ -84,7 +93,9 @@ const ReviewFeedingsView = () => {
                   return (
                     <StyledTableRow key={feeding._id}>
                       <StyledTableCell component="th" scope="row">
-                        <Typography variant="h5" align="center">{feeding.numberOfDucks}</Typography>
+                        <Typography variant="h5" align="center">
+                          {feeding.numberOfDucks}
+                        </Typography>
                       </StyledTableCell>
                       <StyledTableCell component="th" scope="row">
                         <Typography>{feeding.food}</Typography>
@@ -92,9 +103,12 @@ const ReviewFeedingsView = () => {
                       <StyledTableCell align="right" align="center">
                         <Typography>{feeding.quantity}</Typography>
                       </StyledTableCell>
-                      <StyledTableCell align="right">
+                      <StyledTableCell align="center">
                         <Typography>
-                          {format(new Date(feeding.time), "MM/dd/yyyy @ h:mm")}
+                          {format(new Date(feeding.time), "MM/dd/yyyy")}
+                        </Typography>
+                        <Typography>
+                          {format(new Date(feeding.time), "h:mmaaa")}
                         </Typography>
                       </StyledTableCell>
                       <StyledTableCell align="right">
