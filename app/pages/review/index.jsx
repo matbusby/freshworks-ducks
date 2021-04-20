@@ -4,7 +4,7 @@ import ReviewFeedingsView from '../../views/ReviewFeedingsView';
 
 const ReviewFeedingsPage = () => {
   return (
-    <LayoutComponent title="Home">
+    <LayoutComponent title="Review The Duck Feedings">
       <ReviewFeedingsView />
     </LayoutComponent>
   )

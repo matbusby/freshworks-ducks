@@ -77,7 +77,13 @@ const NewFeedingView = () => {
       const combinedDateTime = `${newDate}T${newTime}`;
       const feedingObject = {
         time: combinedDateTime,
-        location: point,
+        location: {
+          coords: point,
+          street: street,
+          city: city,
+          province: province,
+          country: country,
+        },
         food: food,
         quantity: quantity,
       };

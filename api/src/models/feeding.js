@@ -4,7 +4,13 @@ const { Schema } = mongoose;
 
 const feedingSchema = new Schema({
     time: Date,
-    location: pointSchema,
+    location: {
+        coords: pointSchema,
+        street: String,
+        city: String,
+        province: String,
+        country: String,
+    },
     food: String,
     quantity: Number,
 }
