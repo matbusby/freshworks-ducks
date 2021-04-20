@@ -29,6 +29,7 @@ Geocode.setLocationType("ROOFTOP");
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    height: '100%',
     padding: "50px 15px 50px 15px",
     backgroundImage: "url(" + "/assets/images/wetland-bg.svg" + ")",
     backgroundPosition: "bottom",
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: "0",
   },
   card: {
+    textAlign: 'center',
     maxWidth: "800px",
     margin: "0 auto",
   },

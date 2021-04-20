@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
 import routes from './rest/index.js';
 
+const DB_CONNECTION = 'mongodb://mongo:27017/ducks';
+
 mongoose.connect(
-    'mongodb://localhost:27017/ducks' || '',
+    DB_CONNECTION || '',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -12,7 +14,7 @@ mongoose.connect(
         if (error) console.log(error);
         else
             console.log(
-                `Connected to database successfully: mongodb://localhost:27017/app `,
+                `Connected to database successfully: ${DB_CONNECTION}} `,
             );
     },
 );
